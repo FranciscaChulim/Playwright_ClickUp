@@ -1,0 +1,27 @@
+{
+  "name": "playwright_clickup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pw": "npx playwright test",
+    "pw:headed": "npx playwright test --headed"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FranciscaChulim/Playwright_ClickUp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FranciscaChulim/Playwright_ClickUp/issues"
+  },
+  "homepage": "https://github.com/FranciscaChulim/Playwright_ClickUp#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0"
+  }
+}
