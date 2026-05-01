@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pw": "npx playwright test",
-    "pw:headed": "npx playwright test --headed"
-
+    "pw:headed": "npx playwright test --headed",
+    "pw:login": "npm run pw -- login.spec.ts",
+    "pw:workspace": "npm run pw -- workspace.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/FranciscaChulim/Playwright_ClickUp/issues"
   },
@@ -23,5 +24,8 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }
