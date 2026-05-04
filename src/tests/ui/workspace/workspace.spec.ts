@@ -1,3 +1,8 @@
+/**
+ * @Requirement: REQ-001 (User Authentication with session storage)
+ * @Severity:    Critical
+ * @Description: Verify that a user can login and reach the workspace.
+ */
 import { test, expect } from "@fixtures/fixture";
 import { URLS, DEFAULT_TIMEOUT, WORKSPACE_TITLE } from "@data/constants";
 
