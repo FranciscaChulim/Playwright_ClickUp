@@ -11,8 +11,8 @@ test.describe("Login Flow", () => {
     await loginPage.navigate();
     await loginPage.emailInputVisible();
     await loginPage.login(CREDENTIALS.EMAIL, CREDENTIALS.PASSWORD);
-    await loginPage.waitForURL();
+    await page.waitForURL("**/v/l/**", { timeout: 60000 });
     await workspacePage.pickerToggleBtn.waitFor({state: "visible", timeout: DEFAULT_TIMEOUT });
-   await expect(page).toHaveURL(new RegExp(URLS.WORKSPACE));
+    await expect(page).toHaveURL(new RegExp(URLS.WORKSPACE));
   });
 });

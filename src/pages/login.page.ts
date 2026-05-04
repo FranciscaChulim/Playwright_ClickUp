@@ -3,7 +3,7 @@ import { URLS } from '@data/constants';
 
 export class LoginPage {
   private readonly page: Page;
-  public readonly emailInput: Locator;
+  private readonly emailInput: Locator;
   private readonly passwordInput: Locator;
   private readonly loginBtn: Locator;
 
@@ -22,10 +22,6 @@ export class LoginPage {
     await this.emailInput.waitFor({ state: "visible" });
   }
 
-  async waitForURL(){
-    await this.page.waitForURL("**/v/l/**", { timeout: 30000 });
-  }
-  
   async login(user: string, pass: string) {
     await this.emailInput.fill(user);
     await this.passwordInput.fill(pass);

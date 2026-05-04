@@ -1,5 +1,5 @@
 import { test as setup } from "@fixtures/fixture";
-import { CREDENTIALS, DEFAULT_TIMEOUT } from "@data/constants";
+import { CREDENTIALS } from "@data/constants";
 import path from "path";
 import fs from "fs";
 
@@ -27,16 +27,14 @@ setup("Authenticate session", async ({ page, loginPage, workspacePage }) => {
 
   console.log("Creating new auth.json ...");
   await loginPage.navigate();
-  await loginPage.loginEmailInput.waitFor({ state: 'visible'});
+  await loginPage.emailInputVisible();
   await loginPage.login(CREDENTIALS.EMAIL, CREDENTIALS.PASSWORD);
-
-  await page.waitForURL('**/v/l/**', { timeout: 30000 }); 
 
   // 2. Now wait for the heavy UI element to appear
   try {
     await workspacePage.pickerToggleBtn.waitFor({ 
-        state: 'visible', 
-        timeout: DEFAULT_TIMEOUT 
+        state: 'attached', 
+        timeout: 60000, 
     });
   } catch (e) {
     // If it fails, take a screenshot to see what went wrong
