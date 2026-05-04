@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "pw": "npx playwright test",
+    "pw:smoke": "npm run pw -- --grep @smoke",
     "pw:headed": "npx playwright test --headed",
     "pw:login": "npm run pw -- login.spec.ts",
     "pw:workspace": "npm run pw -- workspace.spec.ts"
