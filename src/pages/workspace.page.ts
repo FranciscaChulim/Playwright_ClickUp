@@ -1,5 +1,4 @@
-import { Page, Locator } from '@playwright/test'
-import { URLS } from '@data/constants';
+import { Page, Locator } from '@playwright/test';
 
 export class WorkspacePage {
   readonly page: Page;

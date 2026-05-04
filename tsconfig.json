@@ -20,6 +20,7 @@
     "src/**/*.ts",
     "data/**/*.ts",
     "auth/**/*.ts",
+    "tests/**/*.ts",
     "playwright.config.ts"
   ]
 }

@@ -1,5 +1,5 @@
-import { test as setup, expect } from "@fixtures/fixture";
-import { CREDENTIALS, DEFAULT_TIMEOUT, URLS } from "@data/constants";
+import { test as setup } from "@fixtures/fixture";
+import { CREDENTIALS, DEFAULT_TIMEOUT } from "@data/constants";
 import path from "path";
 import fs from "fs";
 

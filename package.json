@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "pw": "npx playwright test",
     "pw:headed": "npx playwright test --headed",
     "pw:login": "npm run pw -- login.spec.ts",
-    "pw:workspace": "npm run pw -- workspace.spec.ts"
+    "pw:workspace": "npm run pw -- workspace.spec.ts --headed"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,12 @@
   },
   "homepage": "https://github.com/FranciscaChulim/Playwright_ClickUp#readme",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-playwright": "^2.10.2",
+    "typescript-eslint": "^8.59.1"
   },
   "dependencies": {
     "dotenv": "^17.4.2"
