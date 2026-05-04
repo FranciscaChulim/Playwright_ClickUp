@@ -17,6 +17,10 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Create auth directory
+        run: mkdir -p auth
+    - name: Decode Auth JSON
+        run: echo "${{ secrets.AUTH_JSON_BASE64 }}" | base64 --decode > auth/auth.json
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
