@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@data/*": ["data/*"],
+      "@pages/*": ["src/pages/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@tests/*": ["src/tests/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "data/**/*.ts",
+    "auth/**/*.ts",
+    "tests/**/*.ts",
+    "playwright.config.ts"
+  ]
+}
