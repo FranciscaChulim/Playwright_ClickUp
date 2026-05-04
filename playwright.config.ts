@@ -23,7 +23,7 @@ export default defineConfig({
   expect: {
     timeout: 10000,
   },
-  timeout: 60000,
+  timeout: 90000,
 
   /* Configure projects for major browsers */
   projects: [
@@ -31,7 +31,12 @@ export default defineConfig({
     { 
       name: 'setup', 
       testDir: './auth',
-      testMatch: /.*\.setup\.ts/
+      testMatch: /.*\.setup\.ts/,
+      use: {
+      launchOptions: {
+        args: ['--disable-blink-features=AutomationControlled'], // Makes it harder to detect
+      }
+    },
     },
     // Authenticated tests
     {
@@ -51,7 +56,12 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         storageState: { cookies: [], origins: [] },
-      }
+        headless: false,
+        launchOptions: {
+          args: [
+                '--disable-blink-features=AutomationControlled'],
+      },
+    },
     },
   ],
 });

@@ -12,4 +12,14 @@ export class WorkspacePage {
   async goto(url: string) {
     await this.page.goto(url);
   }
+
+  async pickerToggleBtnVisible() {
+    try {
+      await this.pickerToggleBtn.waitFor({ state: 'visible', timeout: 45000 });
+    } catch (error) {
+      console.error("Timeout reached. Capturing failure screenshot...");
+      await this.page.screenshot({ path: 'auth-failure.png', fullPage: true });
+      throw error;
+    }
+  }
 }

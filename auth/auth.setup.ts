@@ -29,18 +29,7 @@ setup("Authenticate session", async ({ page, loginPage, workspacePage }) => {
   await loginPage.navigate();
   await loginPage.emailInputVisible();
   await loginPage.login(CREDENTIALS.EMAIL, CREDENTIALS.PASSWORD);
-
-  // 2. Now wait for the heavy UI element to appear
-  try {
-    await workspacePage.pickerToggleBtn.waitFor({ 
-        state: 'attached', 
-        timeout: 60000, 
-    });
-  } catch (e) {
-    // If it fails, take a screenshot to see what went wrong
-    await page.screenshot({ path: 'auth-failure.png' });
-    throw e;
-  }
+  await workspacePage.pickerToggleBtnVisible();
   await page.waitForTimeout(5000); 
   // Save the authenticated state to a file
   await page.context().storageState({ path: authFile });

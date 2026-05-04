@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "pw": "npx playwright test",
     "pw:headed": "npx playwright test --headed",
-    "pw:login": "npm run pw -- login.spec.ts --headed",
+    "pw:login": "npm run pw -- login.spec.ts",
     "pw:workspace": "npm run pw -- workspace.spec.ts"
   },
   "repository": {
