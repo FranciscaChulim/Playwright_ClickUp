@@ -89,7 +89,6 @@ To maintain a clean codebase, all contributors must follow these standards:
 
 | Description | Command |
 | :--- | :--- |
-
 | Execute linter to verify the code quality | `npm run lint` |
 | Run all tests | `npm run pw` |
 | Run in Headed mode | `npm run pw:headed` |

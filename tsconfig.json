@@ -13,7 +13,8 @@
       "@data/*": ["data/*"],
       "@pages/*": ["src/pages/*"],
       "@fixtures/*": ["src/fixtures/*"],
-      "@tests/*": ["src/tests/*"]
+      "@tests/*": ["src/tests/*"],
+      "@utils/*": ["src/utils/*"],
     }
   },
   "include": [
@@ -21,6 +22,7 @@
     "data/**/*.ts",
     "auth/**/*.ts",
     "tests/**/*.ts",
+    "utils/**/*.ts",
     "playwright.config.ts"
   ]
 }

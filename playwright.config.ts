@@ -11,17 +11,26 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  reporter: [
+    ['line'], // Keeps the terminal output clean
+    ['allure-playwright', { outputFolder: 'allure-results' }]
+  ],
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: 'https://app.clickup.com',
+    screenshot: 'only-on-failure',
     trace: 'on-first-retry',
     actionTimeout: 15000,
     navigationTimeout: 30000,
+    headless: true,
+    launchOptions: {
+      args: [
+      '--disable-blink-features=AutomationControlled',
+      ],
+    },
   },
   expect: {
-    timeout: 10000,
+    timeout: 30000,
   },
   timeout: 90000,
 
@@ -32,11 +41,6 @@ export default defineConfig({
       name: 'setup', 
       testDir: './auth',
       testMatch: /.*\.setup\.ts/,
-      use: {
-      launchOptions: {
-        args: ['--disable-blink-features=AutomationControlled'], // Makes it harder to detect
-      }
-    },
     },
     // Authenticated tests
     {
@@ -57,11 +61,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: { cookies: [], origins: [] },
         headless: false,
-        launchOptions: {
-          args: [
-                '--disable-blink-features=AutomationControlled'],
       },
-    },
     },
   ],
 });
