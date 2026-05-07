@@ -1,4 +1,4 @@
-import { test as setup } from "@fixtures/fixture";
+import { test as setup, expect } from "@fixtures/fixture";
 import { CREDENTIALS } from "@data/constants";
 import path from "path";
 import fs from "fs";
@@ -11,11 +11,9 @@ setup("Authenticate session", async ({ page, loginPage, workspacePage }) => {
   if (!fs.existsSync(authDir)) {
     fs.mkdirSync(authDir, { recursive: true });
   }
-  
   // Check if directory exists, if not, create it
   if (fs.existsSync(authFile)) {
     console.log('auth.json exists, validating session...');
-
     const stats = fs.statSync(authFile);
     const hoursOld = (Date.now() - stats.mtimeMs) / (1000 * 60 * 60);
 
@@ -26,10 +24,10 @@ setup("Authenticate session", async ({ page, loginPage, workspacePage }) => {
   }
 
   console.log("Creating new auth.json ...");
-  await loginPage.navigate();
-  await loginPage.emailInputVisible();
+  await loginPage.navigateTo();
+  expect(loginPage.waitForPageReady()).toBeTruthy();
   await loginPage.login(CREDENTIALS.EMAIL, CREDENTIALS.PASSWORD);
-  await workspacePage.pickerToggleBtnVisible();
+  expect(workspacePage.waitForPageReady()).toBeTruthy();
   await page.waitForTimeout(5000); 
   // Save the authenticated state to a file
   await page.context().storageState({ path: authFile });

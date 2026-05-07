@@ -1,17 +1,15 @@
-/**
- * @Requirement: REQ-001 (User Authentication with session storage)
- * @Severity:    Critical
- * @Description: Verify that a user can login and reach the workspace.
- */
 import { test, expect } from "@fixtures/fixture";
-import { URLS, DEFAULT_TIMEOUT, WORKSPACE_TITLE } from "@data/constants";
+import { URLS, WORKSPACE_TITLE } from "@data/constants";
+import { description, tag, severity } from "allure-js-commons";
 
 test.describe("Login using Authenticated Session", () => {
   test("@smoke As an authenticated user, I should be able to view my workspace", async ({ workspacePage }) => {
-    await workspacePage.goto("/");
-    await workspacePage.goto(URLS.WORKSPACE);
-    const workspacePicker = workspacePage.pickerToggleBtn;
-    await workspacePicker.waitFor({ state: "visible", timeout: DEFAULT_TIMEOUT });
+    await description("Verify that a user can login and reach the workspace using Authentication with session storage");
+    await tag("REQ-001");
+    await severity("Critical");
+
+    await workspacePage.navigateTo("/");
+    await workspacePage.navigateTo(URLS.WORKSPACE);
     await expect(workspacePage.pickerToggleBtn).toContainText( WORKSPACE_TITLE.NAME );
   });
 });
