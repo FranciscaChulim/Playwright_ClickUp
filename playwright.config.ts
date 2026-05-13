@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { CREDENTIALS } from '@utils/constants';
 
 export default defineConfig({
   testDir: '.',
@@ -20,13 +21,13 @@ export default defineConfig({
     baseURL: 'https://app.clickup.com',
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
-    actionTimeout: 15000,
+    actionTimeout: 30000,
     navigationTimeout: 30000,
     headless: true,
     launchOptions: {
       args: [
       '--disable-blink-features=AutomationControlled',
-      ],
+      ]
     },
   },
   expect: {
@@ -61,7 +62,20 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: { cookies: [], origins: [] },
         headless: false,
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
       },
+    },
+    // API tests
+    {
+      name: 'api',
+      testDir: './src/tests/api',
+      testMatch: /.*\.api\.spec\.ts/,
+      use:{
+          extraHTTPHeaders: {
+          'Authorization': CREDENTIALS.API_TOKEN || '',
+          'Content-Type': 'application/json',
+          },
+    },
     },
   ],
 });

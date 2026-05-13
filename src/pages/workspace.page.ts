@@ -2,8 +2,8 @@ import { BasePage } from '@pages/base.page';
 import { Page, Locator } from '@playwright/test';
 
 export class WorkspacePage extends BasePage {
-  public readonly pickerToggleBtn: Locator;
-  private readonly addTaskBtn: Locator;
+
+  public readonly addTaskBtn: Locator;
   private readonly taskTitleInput: Locator;
   private readonly itemDropdown: Locator;
   private readonly taskDescriptionInput: Locator;
@@ -13,10 +13,12 @@ export class WorkspacePage extends BasePage {
   private readonly priorityOption: Locator;
   private readonly quickCreateButton: Locator;
   private readonly statusListBtn: Locator;
+  public readonly inProgressList: Locator;
+  public readonly currentTime: Locator;
+  public readonly sessionId: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.pickerToggleBtn = page.locator('[data-test="workspace-picker-toggle__button"]');
     this.addTaskBtn = page.locator('[data-test="create-task-menu__new-task-button"]');
     this.taskTitleInput = page.locator('[data-test="draft-view__title-task"]');
     this.itemDropdown = page.locator('[data-test="dropdown-list-item__blank"]');
@@ -27,14 +29,9 @@ export class WorkspacePage extends BasePage {
     this.priorityOption = page.locator('[data-test="priorities-list__item-Normal"]');
     this.quickCreateButton = page.locator('[data-test="draft-view__quick-create-create"]');
     this.statusListBtn = page.locator('.cu-draft-view__status.cu-dropdown__toggle');
-  }
-
-  async waitForPageReady() {
-      await this.waitUntilStable(this.pickerToggleBtn);
-  }
-    
-  async navigateTo(url: string) {
-    await this.page.goto(url);
+    this.inProgressList = page.locator('[data-test="list-view-divisions__task-list__in progress"]');
+    this.currentTime = page.locator('.current-time');
+    this.sessionId = page.locator('.session-id');
   }
 
   getTaskRow(taskName: string) {
@@ -70,10 +67,6 @@ export class WorkspacePage extends BasePage {
   async getTaskId(taskName: string) {
     const row = this.page.locator(`[data-test="task-row__container__${taskName}"]`);
     const taskId = await row.getAttribute('data-task');
-    if (!taskId) {
-      console.error(`Could not find task with title: ${taskName}`);
-      return null;
-    }
     return taskId;
   }
 }
