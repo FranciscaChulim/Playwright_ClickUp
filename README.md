@@ -21,6 +21,8 @@ A scalable, reliable automation suite built with [Playwright] using the Page Obj
 - **Node.js:** v18.x or higher
 - **Package Manager:** npm or yarn
 - **IDE:** VS Code (Recommended)
+- Playwright
+- Installed browsers (by running: `npx playwright install`)
 
 ## ⚙️ Setup
 1. Clone the repository:
@@ -32,12 +34,21 @@ A scalable, reliable automation suite built with [Playwright] using the Page Obj
 npm install
 ```
 3. Set up environment variables:
-Create a .env file based on .env.example.
+To run this project, you will need to create a `.env` file in the root directory and add the following environment variables:
+```bash
+WORKSPACE_ID='replace with your workspace id'
+VALID_EMAIL='replace with your email'
+VALID_PASSWORD='replace with your password'
+API_TOKEN='replace with your token'
+TEAM_ID='replace with your team id'
+TASK_LIST_ID='replace with your task list id'
+```
 
 ## 📦 Main Dependecies
 The following core libraries are required to run and manage this testing framework:
 - **@playwright/test**: Core execution framework.
 - **eslint** & **eslint-plugin-playwright**: Static code analysis and Playwright best practices.
+- **allure-playwright** & **allure-commandline**: Detailed HTML test reporting.
 
 
 ## 📁 Project Architecture
@@ -45,29 +56,38 @@ We use a layered POM approach to separate concerns:
 ```bash
 project-root/
 ├── .github/                        # GitHub specific configurations
-│   ├── workflows                   # GitHub actions 
-│   │   ├──playwright.yml           
 │   ├── pull_request_template.md    # Pull Request template
 ├── auth/                           # Authentication Layer
 │   ├── auth.json                   # Stores session state (cookies & localStorage) to bypass login in subsequent tests. 
 │   ├── auth.setup.ts.              # Handles the global authentication flow (Logic to reuse or create a new session)
-├── data/                           # Static Test Data. Centralized location for JSON or CSV files containing test constants
-│   └── constants.js
 ├── src/
 │   ├── api/                        # API Service Layer (Contains logic for direct API interactions)
+│   │   ├──base.api.t               
+│   │   ├──space.api.t                
+│   │   ├──task.api.t                
 │   ├── fixtures/                   # Fixtures configuration
 │   │   ├──fixture                  # Extends Playwright's base test to inject Page Objects.
 │   ├── pages/                      # Page Objects (Locators and UI actions. No assertions here)
+│   │   ├── base.page.ts   
 │   │   ├── login.page.ts        
 │   │   ├── worksapce.page.ts        
 │   ├── tests/                      # Test Suites (This is the only layer where business logic and assertions (expect) reside.)
 │   │   ├── api                     # Standalone backend verification.
+│   │   │   ├── space.api.spec.ts
+│   │   │   ├── task.api.spec.ts
 │   │   ├── ui                      # End-to-end user flow verification. 
 │   │   │   ├── login
 │   │   │   │   ├── login.spec.ts
+│   │   │   ├── tasks
+│   │   │   │   ├── tasks.spec.ts
+│   │   │   ├── visual
+│   │   │   │   ├── visual.spec.ts-snapshots
+│   │   │   │   ├── visual.spec.ts
 │   │   │   ├── workspace
 │   │   │   │   ├── workspace.spec.ts
-│   └── utils/                      # Reusable Helpers (API, DB, Logging, date formatters)
+│   └── utils/                      # Reusable Helpers (DB, data test, date formatters)
+│   │   ├── constants.ts
+│   │   ├── data-helper.ts
 ├── .env                            # Environment variables (Credentials, URLs)
 ├── .gitignore                      # Files and folders excluded from Git
 └── eslint.config.mjs.              # Linter rules configuration
@@ -90,11 +110,16 @@ To maintain a clean codebase, all contributors must follow these standards:
 | Description | Command |
 | :--- | :--- |
 | Execute linter to verify the code quality | `npm run lint` |
-| Run all tests | `npm run pw` |
-| Run in Headed mode | `npm run pw:headed` |
-| Run a specific suite | `npm run pw:login` |
-| Run a specific suite | `npm run pw:workspace` |
-
+| Run all tests in Headless mode| `npm run pw` |
+| Run all test, with generate and open report | `npm run pw:report` |
+| Run all tests in Headed mode | `npm run pw:headed` |
+| Run Login test suite | `npm run pw:login` |
+| Run Workspace test suite | `npm run pw:workspace` |
+| Run Tasks test suite | `npm run pw:tasks` |
+| Run Visual test suite | `npm run pw:visual` |
+| Run API-Space test suite | `npm run pw:api-space` |
+| Run API-Task test suite | `npm run pw:api-task` |
+| Run smoke test suite | `npm run pw:smoke` |
 
 ## ✅ Best Practices
 - Zero Hardcoded Sleeps: Use dynamic waits or waitForSelector.

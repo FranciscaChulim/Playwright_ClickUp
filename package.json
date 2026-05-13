@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "pw": "npx playwright test",
-    "pw:smoke": "npx playwright test --grep @smoke",
     "allure:generate": "npx allure generate allure-results --clean -o allure-report",
     "allure:open": "npx allure open allure-report",
-    "test:report": "npm run pw; npm run allure:generate && npm run allure:open",
-    "pw:headed": "npx playwright test --headed",
-    "pw:login": "npm run pw -- login.spec.ts --headed; npm run allure:generate && npm run allure:open",
-    "pw:workspace": "npm run pw -- workspace.spec.ts; npm run allure:generate && npm run allure:open",
-    "pw:tasks": "npm run pw -- tasks.spec.ts; npm run allure:generate && npm run allure:open"
+    "pw": "npx playwright test",
+    "pw:smoke": "npx playwright test --grep @smoke; npm run allure:generate && npm run allure:open",
+    "pw:report": "npm run pw; npm run allure:generate && npm run allure:open",
+    "pw:headed": "npx playwright test --headed; npm run allure:generate && npm run allure:open",
+    "pw:login": "npm run pw -- login.spec.ts; npm run allure:generate && npm run allure:open",
+    "pw:workspace": "npm run pw -- workspace.spec.ts --headed; npm run allure:generate && npm run allure:open",
+    "pw:tasks": "npm run pw -- tasks.spec.t; npm run allure:generate && npm run allure:open",
+    "pw:visual": "npm run pw -- visual.spec.ts; npm run allure:generate && npm run allure:open",
+    "pw:api-space": "npm run pw -- space.api.spec.ts; npm run allure:generate && npm run allure:open",
+    "pw:api-task": "npm run pw -- task.api.spec.ts; npm run allure:generate && npm run allure:open"
   },
   "repository": {
     "type": "git",
